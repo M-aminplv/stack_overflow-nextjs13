@@ -4,7 +4,7 @@ import  React, { createContext,useContext,  useEffect,  useState  } from "react"
 
 interface ThemeContextType {
   mode: string;
-  setMode: (mude: string) => void;
+  setMode: (mode: string) => void;
 }
 
 
@@ -15,18 +15,18 @@ export function ThemeProvider({children} : {children: React.ReactNode}) {
 
 
   const handleThemeChange = () => {
-    if(mode === 'dark'){
-      setMode('light')
-      document.documentElement.classList.add('light')
+    if(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)){
+      setMode('dark')
+      document.documentElement.classList.add('dark')
     }else {
-      setMode("dark");
-			document.documentElement.classList.add("dark");
+      setMode('light');
+			document.documentElement.classList.remove('dark');
     }
   }
 
-  useEffect (() =>{
-    handleThemeChange();
-  },[mode])
+  useEffect(() => {
+		handleThemeChange();
+	}, [mode]);
 
 
     return (

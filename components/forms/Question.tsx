@@ -52,7 +52,12 @@ const Question = () => {
 			// make an async call to rour API -> create a question 
 			// contain all form data
 
-			await createQuestion({})
+			await createQuestion({
+				title: values.title,
+				contetn: values.explanation,
+				tags: values.tags,
+				// author: 
+			})
 
 			// navigate to home page
 		}catch(error) {
